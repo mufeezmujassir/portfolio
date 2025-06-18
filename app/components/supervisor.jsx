@@ -38,7 +38,7 @@ const Supervisor = () => {
           {/* Logo */}
           <div className="flex items-center">
             <img
-              src={process.env.NODE_ENV === 'production' ? '/portfolio/logo.svg' : '/logo.svg'}
+              src={'/portfolio/logo.svg' }
               alt="Logo"
               className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover"
             />
