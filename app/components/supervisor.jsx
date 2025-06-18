@@ -1,14 +1,17 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { DocumentArrowDownIcon, EnvelopeIcon } from '@heroicons/react/24/outline';
-import About from './about'
-import Project from './projects'
-import Skills from './skills'     
-import Education from './education'
-import Reach from './reachme'
+import About from './about';
+import Project from './projects';
+import Skills from './skills';
+import Education from './education';
+import Reach from './reachme';
 
 const Supervisor = () => {
+  // State to toggle mobile menu
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   // Function to handle smooth scrolling to sections
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -17,7 +20,14 @@ const Supervisor = () => {
         behavior: 'smooth',
         block: 'start'
       });
+      // Close mobile menu after clicking a link
+      setIsMobileMenuOpen(false);
     }
+  };
+
+  // Toggle mobile menu
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -33,7 +43,7 @@ const Supervisor = () => {
               className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover"
             />
           </div>
-          {/* Navigation */}
+          {/* Desktop Navigation */}
           <nav className="hidden md:block">
             <ul className="flex space-x-6 lg:space-x-8">
               {['About us', 'Reach me', 'Worked Projects', 'Skills & Tools', 'Experience & Education', 'Tech Insights'].map((item) => (
@@ -50,12 +60,39 @@ const Supervisor = () => {
             </ul>
           </nav>
           {/* Mobile Menu Button */}
-          <button className="md:hidden text-white focus:outline-none">
+          <button 
+            className="md:hidden text-white focus:outline-none"
+            onClick={toggleMobileMenu}
+            aria-label="Toggle mobile menu"
+          >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              {isMobileMenuOpen ? (
+                // Close icon (X)
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                // Hamburger icon
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
             </svg>
           </button>
         </div>
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <nav className="md:hidden bg-gray-900/95 px-4 pb-4">
+            <ul className="flex flex-col space-y-4">
+              {['About us', 'Reach me', 'Worked Projects', 'Skills & Tools', 'Experience & Education', 'Tech Insights'].map((item) => (
+                <li key={item}>
+                  <button
+                    onClick={() => scrollToSection(item.toLowerCase().replace(/ & /g, '-').replace(/\s+/g, '-'))}
+                    className="w-full text-left text-sm font-bold text-gray-300 hover:text-white transition-colors duration-300"
+                  >
+                    {item}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )}
       </header>
 
       {/* Main Content */}
@@ -100,7 +137,6 @@ const Supervisor = () => {
       <section id="about-us">
         <About />
       </section>
-      
       <section id="worked-projects">
         <Project />
       </section>
