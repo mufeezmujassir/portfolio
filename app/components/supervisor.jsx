@@ -28,7 +28,7 @@ const Supervisor = () => {
           {/* Logo */}
           <div className="flex items-center">
             <img
-              src="/logo.svg"
+              src={process.env.NODE_ENV === 'production' ? '/portfolio/logo.svg' : '/logo.svg'}
               alt="Logo"
               className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover"
             />
@@ -62,7 +62,7 @@ const Supervisor = () => {
       <main className="flex items-center justify-center min-h-screen pt-20 px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center space-y-6 sm:space-y-8 max-w-3xl">
           <img
-            src="/profile.jpeg"
+            src={process.env.NODE_ENV === 'production' ? '/portfolio/profile.jpeg' : '/profile.jpeg'}
             alt="Profile"
             className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full shadow-lg hover:opacity-90 hover:scale-105 transition duration-300 object-cover"
           />
