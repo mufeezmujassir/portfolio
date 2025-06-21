@@ -6,7 +6,7 @@ const Education = () => {
       period:'2024-2028',
       institution: 'BICT Information Communication Technology',
       place: 'University of Sri Jayawardenapura',
-      date: 'May 2028 - May 2028'
+      date: 'May 2024 - May 2028'
     },
     {
       period: '2023 - 2027',
